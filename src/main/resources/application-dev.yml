@@ -1,0 +1,29 @@
+server:
+  port: 8887
+
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    database: 1
+
+cxyh:
+  match: debug:game:free_room_list  #匹配redis key
+
+#md5加密，拼接request请求体
+matchSign: cxyh
+#AES加解密key
+aeskey: 1234567812345678
+
+memcache:
+  servers: 127.0.0.1:11211
+  failover: true
+  initConn: 100
+  minConn: 20
+  maxConn: 1000
+  maintSleep: 50
+  nagel: false
+  socketTO: 3000
+  aliveCheck: true

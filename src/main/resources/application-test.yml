@@ -1,0 +1,56 @@
+server:
+  port: 8887
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    database: 1
+  datasource:
+    username: root
+    password: root
+    #    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/mydatabase?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+#  datasource:
+#    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+#    url: jdbc:sqlserver://192.168.50.62:1433;DatabaseName=mimi
+#    username: sa
+#    password: welcome
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  mapper-locations: classpath*:mapper/*.xml
+
+
+cxyh:
+  match: debug:game:free_room_list  #匹配空闲房间redis key
+  invite: debug:game:full_room_list  #邀请，redis key
+  notAuth: /test,/playerInformation #不需要过滤鉴权的列表url
+
+#md5加密，拼接request请求体
+matchSign: a920b7226ea0dac52158deca9baa0a5f
+#AES加解密key
+aeskey: 1234567812345678
+#解密token的key、iv
+token:
+  key: 358d71c554ae78914fece40609aad77b
+  iv: F3a22EcceB2e0t13
+
+memcache:
+  servers: 127.0.0.1:11211
+  failover: true
+  initConn: 100
+  minConn: 20
+  maxConn: 1000
+  maintSleep: 50
+  nagel: false
+  socketTO: 3000
+  aliveCheck: true
+
+
+
