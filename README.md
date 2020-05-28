@@ -5,13 +5,14 @@
 springboot+mybatis+tkmybatis+mysql+redis+memcached
 
 工具类：
-AESUtil
-DateUtils
+AESUtil \n
+DateUtils \n
 HttpUtils
 Md5Utils
 RedisUtil
 RequestUtil
 StringUtils
+SftpUtil
 
 配置：
 MemcacheConfiguration
