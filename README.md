@@ -4,18 +4,18 @@
 基础架构：
 springboot+mybatis+tkmybatis+mysql+redis+memcached
 
-工具类：
-AESUtil 
-DateUtils \
-HttpUtils \
-Md5Utils \
-RedisUtil \
-RequestUtil \
-StringUtils \
-SftpUtil \
+工具类：   
+AESUtil  
+DateUtils  
+HttpUtils  
+Md5Utils  
+RedisUtil  
+RequestUtil  
+StringUtils  
+SftpUtil 
 
 配置：
-MemcacheConfiguration \
+MemcacheConfiguration  
 RedisConfig
 
 过滤器：
