@@ -27,6 +27,7 @@ import java.util.Set;
  */
 @Slf4j
 @RestController
+@RequestMapping("/filter")
 public class JoinRoomController extends BaseController {
 
     @Autowired

@@ -30,8 +30,7 @@ import java.util.Date;
  * @Date: 2020-05-23
  */
 @Slf4j
-@Component
-@WebFilter
+@WebFilter(urlPatterns = "/filter/*")
 public class AuthFilter implements Filter {
 
     @Autowired
@@ -68,9 +67,9 @@ public class AuthFilter implements Filter {
         String requestURI = request.getRequestURI().replaceFirst(request.getContextPath(), "");
         //方案1：config.notAuthList 配置不过滤的url
         //方案2：urlPatterns 配置某个url前缀下的接口都过滤，@WebFilter(urlPatterns = "/cxyh/filter/api/*", filterName = "rest0PubFilter")
-        if (config.notAuthList.contains(requestURI)) {
-            log.info("不鉴权：" + requestURI);
-        } else {
+//        if (config.notAuthList.contains(requestURI)) {
+//            log.info("不鉴权：" + requestURI);
+//        } else {
             // 防止流读取一次后就没有了, 所以需要将流继续写出去
             ServletRequest requestWrapper = new BodyReaderHttpServletRequestWrapper(request);
             String jsonString = HttpHelper.getBodyString(requestWrapper);
@@ -165,9 +164,9 @@ public class AuthFilter implements Filter {
 
             chain.doFilter(requestWrapper, res);
             return;
-        }
-
-        chain.doFilter(req, res);
+//        }
+//
+//        chain.doFilter(req, res);
 
     }
 
