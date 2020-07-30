@@ -2,6 +2,6 @@ spring:
   profiles:
     active: test
 
-#ÈÕÖ¾´æ´¢Â·¾¶
+#æ—¥å¿—è¾“å‡ºè·¯å¾„
 log:
   path: C:/download/log

@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 
 /**
  * @Description: 自定义切面http响应加密
+ * 若是含有注解@encryption(responseAes = true) 对返回的结果进行加密
  * @Author: chenping
  * @Date: 2020-05-24
  */
@@ -47,7 +48,7 @@ public class AesAspect {
         encryption interfaceFace = null;
 
         Object response = pjPoint.proceed();
-        if ("test".equalsIgnoreCase(profileActive)) {
+        if ("test".equalsIgnoreCase(profileActive)) {//测试环境不进行加密
             return response;
         }
         MethodSignature msig = (MethodSignature) pjPoint.getSignature();

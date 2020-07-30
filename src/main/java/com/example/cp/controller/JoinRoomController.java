@@ -48,7 +48,7 @@ public class JoinRoomController extends BaseController {
     @PostMapping("/match")
     public JSONObject match() {
         try {
-            JSONObject user = decryptToken(request);
+            JSONObject user = decryptToken(request);//对请求体中的token信息解密，token为user信息
 
             String roomId = service.match(user.getString("userId"));
             RoomResp resp = new RoomResp();
