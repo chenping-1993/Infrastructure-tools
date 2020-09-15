@@ -1,7 +1,10 @@
 package com.example.cp.mapper;
 
 import com.example.cp.entity.User;
+import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
+
+import java.util.List;
 
 /**
  * @Description:
@@ -9,7 +12,7 @@ import tk.mybatis.mapper.common.Mapper;
  * @Date: 2020-05-25
  */
 public interface UserMapper extends Mapper<User> {
-//    @SelectProvider(type = UserProvider.class, method = "getListSql")
-//    List<User> list(User vo);
+    @Select("select * from user ")
+    List<User> list();
 
 }
