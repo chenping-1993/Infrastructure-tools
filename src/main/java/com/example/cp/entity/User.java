@@ -1,5 +1,6 @@
 package com.example.cp.entity;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.persistence.Column;
@@ -16,7 +17,9 @@ import java.util.Date;
 public class User {
     private Integer id;
 
+    @ApiModelProperty(value = "姓名")
     private String name;
+    @ApiModelProperty(value = "年龄")
     private Integer age;
 
     @Column(name = "manager_id")
