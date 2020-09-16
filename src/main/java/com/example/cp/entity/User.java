@@ -1,5 +1,6 @@
 package com.example.cp.entity;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  * @Author: chenping
  * @Date: 2020-05-25
  */
+@ApiModel("用户")
 @Data
 @Table(name = "user")
 public class User {

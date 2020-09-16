@@ -23,14 +23,14 @@ public class TestSwaggerController {
 
     @ApiOperation(value = "POST测试" ,  notes="POST测试")
     @RequestMapping(value = "/testPostSwagger",method = RequestMethod.POST)
-    public Object testSwagger(@RequestBody User user) {
+    public List<User> testSwagger(@RequestBody User user) {
         List<User> u = userMapper.selectAll();
         return u;
     }
 
     @ApiOperation(value = "GET测试" ,  notes="GET测试")
     @RequestMapping(value = "/testGetSwagger",method = RequestMethod.GET)
-    public Object testGetSwagger() {
+    public List<User> testGetSwagger() {
         List<User> u = userMapper.selectAll();
         return u;
     }
@@ -38,7 +38,7 @@ public class TestSwaggerController {
     @ApiOperation(value = "GET带参数测试" ,  notes="GET带参数测试")
     @ApiImplicitParam(name = "userName", value = "用户名", required = true,paramType = "query", dataType = "String")
     @RequestMapping(value = "/testGetWithParamSwagger",method = RequestMethod.GET)
-    public Object testGetWithParamSwagger(@RequestParam(value = "userName")String userName) {
+    public List<User> testGetWithParamSwagger(@RequestParam(value = "userName")String userName) {
         List<User> u = userMapper.selectAll();
         return u;
     }
@@ -49,7 +49,7 @@ public class TestSwaggerController {
             @ApiImplicitParam(name = "userName", value = "用户名",defaultValue = "jack",required = true,paramType = "query", dataType = "String")
     })
     @RequestMapping(value = "/testGetWithParamsSwagger",method = RequestMethod.GET)
-    public Object testGetWithParamsSwagger(@RequestParam(value = "userName")String userName,@RequestParam(value = "id")Integer id) {
+    public List<User> testGetWithParamsSwagger(@RequestParam(value = "userName")String userName,@RequestParam(value = "id")Integer id) {
         System.out.println(id);
         List<User> u = userMapper.selectAll();
         return u;
