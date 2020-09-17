@@ -69,7 +69,6 @@ public class HttpUtils {
         try{
             httpClient = HttpClients.createDefault();
 
-//            HttpPost httpPost = new HttpPost(url);
             HttpGet httpGet = new HttpGet(url);
             RequestConfig requestConfig = RequestConfig.custom()
                     .setSocketTimeout(10*1000).setConnectTimeout(10*1000).setConnectionRequestTimeout(10*1000).build();

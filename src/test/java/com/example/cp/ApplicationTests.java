@@ -1,5 +1,6 @@
 package com.example.cp;
 
+import com.example.cp.common.tool.RedisUtil;
 import com.whalin.MemCached.MemCachedClient;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,9 @@ class ApplicationTests {
 
     @Autowired
     private MemCachedClient memCachedClient;
+
+    @Autowired
+    RedisUtil redisUtil;
 
     @Test
     public void contextLoads() throws InterruptedException{
@@ -35,6 +39,12 @@ class ApplicationTests {
         b = memCachedClient.get("b");
         System.out.println(a);
         System.out.println(b);
+    }
+
+    @Test
+    public void testRedis() throws InterruptedException{
+        System.out.println(redisUtil.zsetGetAll("debug:game:free_room_list"));
+
     }
 
 }

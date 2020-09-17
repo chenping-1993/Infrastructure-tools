@@ -98,6 +98,15 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * @Description:  截取list集合
+     * @param: key
+     * @param: start
+     * @param: end
+     * @return: java.lang.String
+     * @Author: chenping
+     * @Date: 2020/9/17 16:59
+     */
     public String trimList(String key, long start, long end) {
         if (key != null && !key.equals("")) {
             Jedis Jedis = null;
@@ -119,7 +128,14 @@ public class RedisUtil {
         }
     }
 
-    public long scard(String key) {
+    /**
+     * @Description:  set 获取指定key的值的数量
+     * @param: key
+     * @return: long
+     * @Author: chenping
+     * @Date: 2020/9/17 16:06
+     */
+    public long setLength(String key) {
         if (key == null) {
             return 0L;
         } else {
@@ -140,8 +156,17 @@ public class RedisUtil {
         }
     }
 
-    public boolean sadd(String key, int seconds, String... value) {
-        boolean result = this.sadd(key, value);
+    /**
+     * @Description:  set一个或者多个数据并设置过期时间
+     * @param: key
+     * @param: seconds 过期时间
+     * @param: value
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 16:08
+     */
+    public boolean setAddWithTime(String key, int seconds, String... value) {
+        boolean result = this.setAdd(key, value);
         if (result) {
             long i = this.expire(key, seconds);
             return i == 1L;
@@ -150,7 +175,15 @@ public class RedisUtil {
         }
     }
 
-    public boolean sadd(String key, String... value) {
+    /**
+     * @Description:  set一个或者多个数据
+     * @param: key
+     * @param: value
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 16:09
+     */
+    public boolean setAdd(String key, String... value) {
         if (key != null && value != null) {
             Jedis Jedis = null;
 
@@ -172,8 +205,16 @@ public class RedisUtil {
         }
     }
 
-    //修改list值
-    public boolean lset(String key,Long index, String value) {
+    /**
+     * @Description:  修改list指定索引的值
+     * @param: key
+     * @param: index 索引
+     * @param: value
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 16:12
+     */
+    public boolean listSetIndexValue(String key,Long index, String value) {
         if (key != null && value != null && index != null) {
             Jedis Jedis = null;
 
@@ -195,7 +236,15 @@ public class RedisUtil {
         }
     }
 
-    public boolean sismember(String key, String value) {
+    /**
+     * @Description:  判断是否是set集合的元素
+     * @param: key
+     * @param: value
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 16:27
+     */
+    public boolean isSetMember(String key, String value) {
         if (key != null && value != null) {
             Jedis Jedis = null;
 
@@ -216,7 +265,14 @@ public class RedisUtil {
         }
     }
 
-    public Set<String> smembers(String key) {
+    /**
+     * @Description:  获取指定key的set集合
+     * @param: key
+     * @return: java.util.Set<java.lang.String>
+     * @Author: chenping
+     * @Date: 2020/9/17 16:29
+     */
+    public Set<String> setMembers(String key) {
         Jedis Jedis = null;
 
         try {
@@ -233,7 +289,15 @@ public class RedisUtil {
         return null;
     }
 
-    public boolean srem(String key, String... value) {
+    /**
+     * @Description:  移除set集合中一个或多个成员
+     * @param: key
+     * @param: value
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 16:31
+     */
+    public boolean setRemove(String key, String... value) {
         Jedis Jedis = null;
 
         try {
@@ -251,7 +315,14 @@ public class RedisUtil {
         return false;
     }
 
-    public String srandmember(String key) {
+    /**
+     * @Description:  返回set集合中一个或多个随机数
+     * @param: key
+     * @return: java.lang.String
+     * @Author: chenping
+     * @Date: 2020/9/17 16:32
+     */
+    public String setReturnRandomValue(String key) {
         Jedis Jedis = null;
 
         try {
@@ -268,6 +339,14 @@ public class RedisUtil {
         return "";
     }
 
+    /**
+     * @Description:  删除list集合的数据
+     * @param: key
+     * @param: values
+     * @return: int
+     * @Author: chenping
+     * @Date: 2020/9/17 16:49
+     */
     public int removeListValue(String key, List<String> values) {
         return this.removeListValue(key, 1L, values);
     }
@@ -327,7 +406,14 @@ public class RedisUtil {
         }
     }
 
-    public long llen(String key) {
+    /**
+     * @Description:  获取list集合指定key的集合长度
+     * @param: key
+     * @return: long
+     * @Author: chenping
+     * @Date: 2020/9/17 17:03
+     */
+    public long listLen(String key) {
         if (key == null) {
             return 0L;
         } else {
@@ -358,6 +444,14 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * @Description:  list集合放入数据
+     * @param: key
+     * @param: value
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 17:04
+     */
     public boolean lpush(String key, String... value) {
         if (key != null && value != null) {
             Jedis Jedis = null;
@@ -380,6 +474,14 @@ public class RedisUtil {
         }
     }
 
+    /**
+     * @Description:  获取list集合指定索引的数据
+     * @param: key
+     * @param: index
+     * @return: java.lang.String
+     * @Author: chenping
+     * @Date: 2020/9/17 17:05
+     */
     public String lindex(String key, int index) {
         if (key == null) {
             return "";
@@ -471,6 +573,13 @@ public class RedisUtil {
         return result;
     }
 
+    /**
+     * @Description:  移除列表的最后一个元素，返回值为移除的元素
+     * @param: key
+     * @return: java.lang.String
+     * @Author: chenping
+     * @Date: 2020/9/17 17:09
+     */
     public String rpop(String key) {
         String data = null;
         Jedis jedis = null;
@@ -509,7 +618,7 @@ public class RedisUtil {
         }
     }
 
-    public boolean setHSet(String domain, String key, String value) {
+    public boolean hashSet(String domain, String key, String value) {
         if (value == null) {
             return false;
         } else {
@@ -531,7 +640,7 @@ public class RedisUtil {
         }
     }
 
-    public String getHSet(String domain, String key) {
+    public String hashGet(String domain, String key) {
         Jedis Jedis = null;
 
         try {
@@ -548,7 +657,7 @@ public class RedisUtil {
         return null;
     }
 
-    public long delHSet(String domain, String key) {
+    public long hashDelete(String domain, String key) {
         Jedis Jedis = null;
         long count = 0L;
 
@@ -565,7 +674,7 @@ public class RedisUtil {
         return count;
     }
 
-    public long delHSet(String domain, String... key) {
+    public long hashDelete(String domain, String... key) {
         Jedis Jedis = null;
         long count = 0L;
 
@@ -582,13 +691,13 @@ public class RedisUtil {
         return count;
     }
 
-    public boolean existsHSet(String key, String field) {
+    public boolean hashExists(String domain, String key) {
         Jedis Jedis = null;
         boolean isExist = false;
 
         try {
             Jedis = this.jedisPool.getResource();
-            isExist = Jedis.hexists(key, field);
+            isExist = Jedis.hexists(domain, key);
         } catch (Exception var9) {
             log.error("existsHSet error.", var9);
             this.returnBrokenResource(Jedis);
@@ -627,7 +736,14 @@ public class RedisUtil {
         return null;
     }
 
-    public List<String> hvals(String domain) {
+    /**
+     * @Description:  获取hash 所有的value值
+     * @param: domain
+     * @return: java.util.List<java.lang.String>
+     * @Author: chenping
+     * @Date: 2020/9/17 17:31
+     */
+    public List<String> hashValues(String domain) {
         Jedis Jedis = null;
         List retList = null;
 
@@ -644,7 +760,7 @@ public class RedisUtil {
         return retList;
     }
 
-    public Set<String> hkeys(String domain) {
+    public Set<String> hashKeys(String domain) {
         Jedis Jedis = null;
         Set retList = null;
 
@@ -662,7 +778,7 @@ public class RedisUtil {
     }
 
 
-    public long lenHset(String domain) {
+    public long hashLength(String domain) {
         Jedis Jedis = null;
         long retList = 0L;
 
@@ -679,7 +795,16 @@ public class RedisUtil {
         return retList;
     }
 
-    public boolean setSortedSet(String key, long score, String value) {
+    /**
+     * @Description:  zset set值
+     * @param: key
+     * @param: score 排名
+     * @param: value 唯一
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2020/9/17 17:20
+     */
+    public boolean zsetAdd(String key, long score, String value) {
         Jedis Jedis = null;
 
         try {
@@ -756,14 +881,21 @@ public class RedisUtil {
         return retList;
     }
 
-    public List<Tuples> zgetAll(String key, long start, long end) {
+    /**
+     * @Description:  获取zset的所有的score和value
+     * @param: key
+     * @return: java.util.List<com.example.cp.entity.Tuples>
+     * @Author: chenping
+     * @Date: 2020/9/17 17:56
+     */
+    public List<Tuples> zsetGetAll(String key) {
         Jedis Jedis = null;
         Set<Tuple> setList = null;
-        List<Tuples> list = null;
+        List<Tuples> list = new ArrayList<>();
 
         try {
             Jedis = this.jedisPool.getResource();
-            setList = Jedis.zrangeWithScores(key,start,end);
+            setList = Jedis.zrangeWithScores(key,0,-1);
             for (Tuple tuple : setList) {
                 Tuples tuples = new Tuples();
                 tuples.setElement(tuple.getElement());
@@ -798,7 +930,7 @@ public class RedisUtil {
         return 0L;
     }
 
-    public boolean delSortedSet(String key, String value) {
+    public boolean zsetDelete(String key, String value) {
         Jedis Jedis = null;
 
         try {
@@ -940,6 +1072,13 @@ public class RedisUtil {
         return false;
     }
 
+    /**
+     * @Description:  将 key 中储存的数字值增一
+     * @param: key
+     * @return: long
+     * @Author: chenping
+     * @Date: 2020/9/17 17:13
+     */
     public long incr(String key) {
         Jedis Jedis = null;
 
