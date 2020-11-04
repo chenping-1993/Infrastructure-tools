@@ -190,10 +190,7 @@ public class DateUtils {
     public static String changeFormatDateString(String format1, String format2, String strDate) {
         if (strDate == null)
             return "";
-//        if (strDate.length() >= format1.length() && format1.length() >= format2.length()) {
         return parseDateToString(parseStringToDate(strDate, format1), format2);
-//        }
-//        return strDate;
     }
 
     /**
@@ -416,6 +413,10 @@ public class DateUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Date().getTime());
+//        System.out.println(new Date().getTime());
+//        System.out.println(afterNDaysDate("2020-01-01",5,YYYY_MM_DD));
+        String s1 = changeFormatDateString(YYYY_MM_DD_HH_MM_SS,"yyyy-MM-dd 00:00:00","2020-01-01 12:24:12");
+        String s = formatStrdateToStrdate("2020-01-01 12:24:12",YYYY_MM_DD);
+        System.out.println(s);
     }
 }
