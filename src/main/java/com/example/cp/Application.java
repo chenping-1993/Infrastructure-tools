@@ -18,6 +18,6 @@ public class Application {
         ConfigurableApplicationContext context = SpringApplication.run(Application.class, args);
         String port = context.getEnvironment().getProperty("server.port");
         System.out.println("swagger 地址：http://localhost:"+port+"/swagger-ui.html");
+        System.out.println("druid监控 地址：http://localhost:"+port+"/druid/index.html");
     }
-
 }
