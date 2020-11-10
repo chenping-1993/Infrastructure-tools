@@ -5,6 +5,7 @@ import com.example.cp.mapper.UserMapper;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -39,7 +40,10 @@ public class TestSwaggerController {
     @ApiImplicitParam(name = "userName", value = "用户名", required = true,paramType = "query", dataType = "String")
     @RequestMapping(value = "/testGetWithParamSwagger",method = RequestMethod.GET)
     public List<User> testGetWithParamSwagger(@RequestParam(value = "userName")String userName) {
-        List<User> u = userMapper.selectAll();
+        Example example = new Example(User.class);
+        Example.Criteria criteria = example.createCriteria();
+        criteria.andLike("name","%"+userName+"%");
+        List<User> u = userMapper.selectByExample(example);
         return u;
     }
 
@@ -51,7 +55,10 @@ public class TestSwaggerController {
     @RequestMapping(value = "/testGetWithParamsSwagger",method = RequestMethod.GET)
     public List<User> testGetWithParamsSwagger(@RequestParam(value = "userName")String userName,@RequestParam(value = "id")Integer id) {
         System.out.println(id);
-        List<User> u = userMapper.selectAll();
+        User user = new User();
+        user.setName(userName);
+        user.setId(id);
+        List<User> u = userMapper.select(user);
         return u;
     }
 }

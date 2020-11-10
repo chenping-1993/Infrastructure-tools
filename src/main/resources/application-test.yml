@@ -19,7 +19,7 @@ spring:
       stat-view-servlet:
         login-username: druid
         login-password: 123456
-        allow: 127.0.0.1
+        allow: 127.0.0.1,172.30.67.191
 
   #  datasource:
 #    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver

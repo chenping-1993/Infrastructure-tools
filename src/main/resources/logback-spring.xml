@@ -99,10 +99,10 @@
     </appender>
 
 
-    <logger name="com.apache.ibatis" level="TRACE"/>
+<!--    <logger name="com.apache.ibatis" level="TRACE"/>-->
     <!-- 输出sql日志 -->
     <logger name="com.example.cp.mapper" level="DEBUG">
-        <appender-ref ref="STDOUT" />
+<!--        <appender-ref ref="STDOUT" />-->
         <appender-ref ref="sqlFILE" />
         <appender-ref ref="infoFILE" />
     </logger>
