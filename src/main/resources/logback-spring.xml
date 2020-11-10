@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+<!--    优先级从高到低依次为：OFF、FATAL、ERROR、WARN、INFO、DEBUG、TRACE、 ALL ；日志级别低的可以打印出日志级别高的级别的日志；
+    例如 定义日志级别为debug则可以打印出日志级别info的日志  -->
+
     <!--定义日志文件的存储地址-->
 <!--    <property name="LOG_HOME" value="${LOG_FILE_PATH:-.}" />-->
     <springProperty  name="LOG_HOME" source="log.path" defaultValue="C:/download/log"/>
@@ -78,15 +81,13 @@
             <!-- 保留30天日志 -->
             <MaxHistory>30</MaxHistory>
         </rollingPolicy>
-<!--        <layout class="ch.qos.logback.classic.PatternLayout">-->
-<!--            <Pattern>-->
-<!--                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n-->
-<!--            </Pattern>-->
-<!--        </layout>-->
     </appender>
 
     <!--控制台所有日志，包含数据库sql日志-->
     <appender name="allFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ALL</level>
+        </filter>
         <file>${LOG_HOME}/all/logback-all.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <FileNamePattern>${LOG_HOME}/all/logback-all.%d{yyyy-MM-dd}-%i.log</FileNamePattern>
@@ -102,7 +103,6 @@
 <!--    <logger name="com.apache.ibatis" level="TRACE"/>-->
     <!-- 输出sql日志 -->
     <logger name="com.example.cp.mapper" level="DEBUG">
-<!--        <appender-ref ref="STDOUT" />-->
         <appender-ref ref="sqlFILE" />
         <appender-ref ref="infoFILE" />
     </logger>
