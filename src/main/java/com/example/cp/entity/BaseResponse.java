@@ -8,9 +8,11 @@ import lombok.Data;
  * @Date: 2020-05-23
  */
 @Data
-public class BaseResponse {
+public class BaseResponse<T> {
 
     public  String code;
 
     public String message;
+
+    private T data;
 }
