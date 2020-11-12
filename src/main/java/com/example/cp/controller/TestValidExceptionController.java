@@ -1,5 +1,7 @@
 package com.example.cp.controller;
 
+import com.example.cp.common.exception.GameException;
+import com.example.cp.entity.BaseResponse;
 import com.example.cp.entity.TestValidVO;
 import com.example.cp.entity.User;
 import com.example.cp.mapper.UserMapper;
@@ -25,8 +27,22 @@ public class TestValidExceptionController {
 
     @ApiOperation(value = "POST入参校验" ,  notes="POST入参校验")
     @PostMapping(value = "/testPostValid")
-    public List<User> testSwagger(@RequestBody @Validated TestValidVO vo) {
+    public BaseResponse testPostValidException(@RequestBody @Validated TestValidVO vo) {
         List<User> u = userMapper.selectAll();
-        return u;
+        return BaseResponse.ok(u);
+    }
+
+    @ApiOperation(value = "POST测试业务异常" ,  notes="POST测试业务异常")
+    @PostMapping(value = "/testServiceMyException")
+    public BaseResponse testServiceException(@RequestBody @Validated TestValidVO vo) {
+        List<User> u = userMapper.selectAll();
+        throw new GameException("请求失败");
+    }
+
+    @ApiOperation(value = "测试Exception异常" ,  notes="测试Exception异常")
+    @GetMapping(value = "/testServiceException")
+    public BaseResponse testException() {
+        List<User> u = userMapper.selectAll();
+        throw new RuntimeException();
     }
 }

@@ -7,7 +7,7 @@ package com.example.cp.common.enums;
  */
 public enum CodeMessage {
 
-    SUCCESS("0", "成功"), WRONG_PARAMETER("1001", "请求参数有误"),
+    SUCCESS("200", "成功"), WRONG_PARAMETER("1001", "请求参数有误"),
     WRONG_TIME("1002", "网络连接失败，请检查手机的日期和时间设置是否正确"),
     SERVICE_EXCEPTION("1500", "服务异常，请重试"),
     REQ_FAIL("500", "请求失败");
@@ -17,7 +17,7 @@ public enum CodeMessage {
     private String msg;
 
 
-    private CodeMessage(String code, String msg) {
+    CodeMessage(String code, String msg) {
         this.code = code;
         this.msg = msg;
     }

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * @Description: rest请求入参校验 全局异常处理类
+ * @Description: 全局异常处理类；rest请求入参校验异常 、业务异常 响应
  * @Author: chenping
  * @Date: 2020-11-11
  */
@@ -16,17 +16,18 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public BaseResponse methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
-        BaseResponse response = new BaseResponse();
         ObjectError error = e.getBindingResult().getAllErrors().get(0);
-        response.setMessage(error.getDefaultMessage());
-        return response;
+        return BaseResponse.fail(error.getDefaultMessage());
     }
 
 
     @ExceptionHandler(GameException.class)
     public BaseResponse testExceptionHandler(GameException e) {
-        BaseResponse response = new BaseResponse();
-        response.setMessage(e.getMessage());
-        return response;
+        return BaseResponse.fail(e.getMessage());
+    }
+
+    @ExceptionHandler(Exception.class)
+    public BaseResponse ExceptionHandler(Exception e) {
+        return BaseResponse.fail(e.toString());
     }
 }
