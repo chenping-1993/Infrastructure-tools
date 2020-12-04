@@ -12,6 +12,7 @@
 		<property name="endingDelimiter" value="`"/>
 
 		<!--添加自定义的继承接口-->
+		<!-- 如果不使用tkmybatis 可以把此部分注释掉 -->
 		<plugin type="tk.mybatis.mapper.generator.MapperPlugin">
 			<property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
 			<property name="lombok" value="Data"/>
@@ -32,19 +33,19 @@
 		<!--mapper包路径-->
 		<javaClientGenerator targetPackage="com.example.cp.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
 		<!--表配置，tableName支持%，表示全部生成； 生成多个表可以配置多个table-->
-		<table tableName="sys_role" domainObjectName="SysRole">
-			<!--mysql 配置-->
-			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-		</table>
+<!--		<table tableName="sys_role" domainObjectName="SysRole">-->
+<!--			&lt;!&ndash;mysql 配置&ndash;&gt;-->
+<!--			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--		</table>-->
 
 		<table tableName="user_info" domainObjectName="UserInfo">
 			<!--mysql 配置-->
 			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
 		</table>
 
-		<table tableName="user_password" domainObjectName="UserPassword">
-			<!--mysql 配置-->
-			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>
-		</table>
+<!--		<table tableName="user_password" domainObjectName="UserPassword">-->
+<!--			&lt;!&ndash;mysql 配置&ndash;&gt;-->
+<!--			<generatedKey column="id" sqlStatement="Mysql" identity="true"/>-->
+<!--		</table>-->
 	</context>
 </generatorConfiguration>

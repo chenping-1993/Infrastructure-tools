@@ -29,24 +29,16 @@ public class MybatisGeneratorUtil {
         boolean overwrite = false;//是否覆盖
         InputStream inputStream = MybatisGeneratorUtil.class.getClassLoader().getResourceAsStream("mybatis/generatorConfig.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
-        Configuration config = null;
+        Configuration config;
         try {
             config = cp.parseConfiguration(inputStream);
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);
             MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
             myBatisGenerator.generate(null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XMLParserException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (IOException | XMLParserException | InvalidConfigurationException | InterruptedException | SQLException e) {
             e.printStackTrace();
         }
-        warnings.stream().forEach(System.out::println);
+        warnings.forEach(System.out::println);
         System.out.println("代码生成完毕>>>>>>>>>>>>");
         return  true;
     }
