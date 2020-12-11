@@ -6,14 +6,17 @@ import cn.afterturn.easypoi.excel.entity.ExcelToHtmlParams;
 import com.example.cp.common.tool.ExcelUtil;
 import com.example.cp.entity.User;
 import com.example.cp.mapper.UserMapper;
+import com.example.cp.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.poi.ss.usermodel.Workbook;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,12 +28,16 @@ import java.util.List;
  * @Author: chenping
  * @Date: 2020-11-16
  */
+@Slf4j
 @Api(tags = "excel 测试")
 @RestController
 public class TestExcelController {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserService userService;
 
     @ApiOperation(value = "导出excel" ,  notes="导出excel")
     @GetMapping(value = "/exportExcel")
@@ -56,6 +63,18 @@ public class TestExcelController {
     public void excelToHtml2016(HttpServletResponse response) throws IOException {
         ExcelToHtmlParams params = new ExcelToHtmlParams(WorkbookFactory.create(POICacheManager.getFile("C:/Users/chenping/Desktop/工作簿1.xlsx")),true,"yes");
         response.getOutputStream().write(ExcelXorHtmlUtil.excelToHtml(params).getBytes());
+    }
+
+    @ApiOperation(value = "导入excel 读取excel内容" )
+    @PostMapping("/readExcelData")
+    public List<User> readExcelData(@RequestBody MultipartFile multipartFile) {
+        List<User> list = null;
+        try {
+            list = userService.readExcelToList(multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
 }
