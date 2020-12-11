@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -61,7 +62,9 @@ public class UserService {
                 for (int j = 0; j < columnNum; j++) {
                     CellType cellType = row.getCell(j).getCellType();
                     if (cellType.equals(CellType.NUMERIC)) {
-                        oneRowValueList.add(String.valueOf(row.getCell(j).getNumericCellValue()));
+                        //按照excel单元格的真实数据格式取数据，转为字符串； 否则有可能出现： 真实数据是int类型，取出来是double类型
+                        String num = NumberToTextConverter.toText(row.getCell(j).getNumericCellValue());
+                        oneRowValueList.add(num);
                     } else if (cellType.equals(CellType.STRING)) {
                         oneRowValueList.add(String.valueOf(row.getCell(j).getStringCellValue()));
                     } else {
@@ -69,10 +72,9 @@ public class UserService {
                     }
                 }
                 User user = new User();
-                //防止报转换异常，先转double后取int值
-                user.setId(Double.valueOf(oneRowValueList.get(0)).intValue());
+                user.setId(Integer.parseInt(oneRowValueList.get(0)));
                 user.setName(oneRowValueList.get(1));
-                user.setAge(Double.valueOf(oneRowValueList.get(2)).intValue());
+                user.setAge(Integer.parseInt(oneRowValueList.get(2)));
 
                 list.add(user);
             }
