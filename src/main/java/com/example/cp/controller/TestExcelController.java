@@ -68,12 +68,7 @@ public class TestExcelController {
     @ApiOperation(value = "导入excel 读取excel内容" )
     @PostMapping("/readExcelData")
     public List<User> readExcelData(@RequestBody MultipartFile multipartFile) {
-        List<User> list = null;
-        try {
-            list = userService.readExcelToList(multipartFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<User> list = userService.readExcelToList(multipartFile);
         return list;
     }
 
