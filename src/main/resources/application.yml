@@ -5,3 +5,6 @@ spring:
 #日志输出路径
 log:
   path: C:/download/log
+
+logging:
+  config: classpath:logback-spring.xml

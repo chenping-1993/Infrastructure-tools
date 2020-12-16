@@ -29,8 +29,33 @@ public class GlobalExceptionHandler {
         return BaseResponse.fail(e.getMessage());
     }
 
+    /** 
+     * @Description:  打印exception日志到控制台和error日志文件
+     * @param: e 
+     * @return: com.example.cp.entity.BaseResponse 
+     * @Author: chenping
+     * @Date: 2020/12/16 18:04
+     */
     @ExceptionHandler(Exception.class)
     public BaseResponse ExceptionHandler(Exception e) {
-        return BaseResponse.fail(e.toString());
+        log.error("异常错误信息：",e);
+        BaseResponse baseResponse = BaseResponse.fail();
+        StringBuilder sb = new StringBuilder();
+        sb.append(e.toString()).append(" : ").append(e.getMessage());
+        sb.append(System.getProperty("line.separator"));
+        StackTraceElement[] stackTraceElements = e.getStackTrace();
+        if (null != stackTraceElements){
+            int i = 1;
+            for (StackTraceElement se: stackTraceElements) {
+                if (i < 20) {
+                    sb.append(se.toString());
+                    sb.append(System.getProperty("line.separator"));
+                        i++;
+                }
+            }
+        }
+        log.error("e.getMessage():[{}]",sb.toString());
+        baseResponse.setTrace(sb.toString());
+        return baseResponse;
     }
 }

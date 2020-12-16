@@ -80,7 +80,7 @@ public class UserService {
                     list.add(user);
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error(e.toString());
             e.printStackTrace();
         }

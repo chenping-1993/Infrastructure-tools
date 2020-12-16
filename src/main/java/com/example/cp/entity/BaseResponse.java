@@ -14,6 +14,7 @@ public class BaseResponse<T> {
     public  String code;
 
     public String message;
+    public String trace;//错误信息
 
     private T data;
 
