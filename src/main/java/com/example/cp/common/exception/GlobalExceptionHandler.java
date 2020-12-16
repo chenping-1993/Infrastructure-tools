@@ -17,6 +17,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    /**
+     * @Description:  方法中的参数格式正确性异常
+     * @param: e
+     * @return: com.example.cp.entity.BaseResponse
+     * @Author: chenping
+     * @Date: 2020/12/16 18:15
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public BaseResponse methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e) {
         ObjectError error = e.getBindingResult().getAllErrors().get(0);
@@ -24,6 +31,13 @@ public class GlobalExceptionHandler {
     }
 
 
+    /**
+     * @Description:  自定义异常
+     * @param: e
+     * @return: com.example.cp.entity.BaseResponse
+     * @Author: chenping
+     * @Date: 2020/12/16 18:16
+     */
     @ExceptionHandler(GameException.class)
     public BaseResponse testExceptionHandler(GameException e) {
         return BaseResponse.fail(e.getMessage());
