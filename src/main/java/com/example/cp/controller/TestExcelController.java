@@ -1,8 +1,10 @@
 package com.example.cp.controller;
 
 import cn.afterturn.easypoi.cache.manager.POICacheManager;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
 import cn.afterturn.easypoi.excel.ExcelXorHtmlUtil;
 import cn.afterturn.easypoi.excel.entity.ExcelToHtmlParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.example.cp.common.tool.ExcelUtil;
 import com.example.cp.entity.User;
 import com.example.cp.mapper.UserMapper;
@@ -21,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -69,6 +72,17 @@ public class TestExcelController {
     @PostMapping("/readExcelData")
     public List<User> readExcelData(@RequestBody MultipartFile multipartFile) {
         List<User> list = userService.readExcelToList(multipartFile);
+        return list;
+    }
+
+    @ApiOperation(value = "注解导入excel" )
+    @PostMapping("/importExcelData")
+    public List<User> readExcelData1(@RequestBody MultipartFile multipartFile) throws Exception {
+        InputStream inputStream = multipartFile.getInputStream();
+        ImportParams importParams = new ImportParams();
+        importParams.setHeadRows(1);
+        importParams.setTitleRows(0);
+        List<User> list = ExcelImportUtil.importExcel(inputStream, User.class, importParams);
         return list;
     }
 
