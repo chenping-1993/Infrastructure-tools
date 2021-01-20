@@ -46,8 +46,7 @@ public class TestWordController {
         map.put("date", "2015-01-03");
         try {
             //源文件
-            XWPFDocument doc = WordExportUtil.exportWord07(
-                    "C:/Users/chenping/Desktop/kafka.docx", map);
+            XWPFDocument doc = WordExportUtil.exportWord07("C:/Users/chenping/Desktop/kafka.docx", map);
             //目标文件
             FileOutputStream fos = new FileOutputStream("C:/Users/chenping/Desktop/simple.docx");
             doc.write(fos);
