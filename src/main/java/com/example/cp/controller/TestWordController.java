@@ -4,6 +4,7 @@ package com.example.cp.controller;
 import cn.afterturn.easypoi.word.WordExportUtil;
 
 import com.example.cp.common.tool.ExcelUtil;
+import com.example.cp.common.tool.WordUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.FileOutputStream;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +76,13 @@ public class TestWordController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @ApiOperation(value = "预览word文件" ,  notes="预览word文件")
+    @GetMapping(value = "/viewDocToWord")
+    public void viewDocToWord(HttpServletResponse response) throws ParserConfigurationException, TransformerException, IOException {
+        String result = WordUtils.viewDoc("C:/Users/chenping/Desktop/","jl.doc");
+        response.getOutputStream().write(result.getBytes());
     }
 
 }
