@@ -202,6 +202,11 @@
             <artifactId>poi-scratchpad</artifactId>
             <version>4.1.1</version>
         </dependency>
+<!--        rabbitmq  需要安装 erlang语言-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
