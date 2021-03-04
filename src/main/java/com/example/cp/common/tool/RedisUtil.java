@@ -31,17 +31,17 @@ public class RedisUtil {
 
     public long expire(String key, int seconds) {
         if (key != null && !key.equals("")) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                long var4 = Jedis.expire(key, seconds);
+                jedis = this.jedisPool.getResource();
+                long var4 = jedis.expire(key, seconds);
                 return var4;
             } catch (Exception var9) {
                 log.error("EXPIRE error[key=" + key + " seconds=" + seconds + "]" + var9.getMessage(), var9);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return 0L;
@@ -53,9 +53,9 @@ public class RedisUtil {
     //订阅
     public void subscribeMsg(JedisPubSub jedisPubSub, String channels) {
         try {
-            Jedis Jedis = null;
-            Jedis = this.jedisPool.getResource();
-            Jedis.subscribe(jedisPubSub, channels);
+            Jedis jedis = null;
+            jedis = this.jedisPool.getResource();
+            jedis.subscribe(jedisPubSub, channels);
         } catch (Exception e) {
         }
     }
@@ -64,12 +64,9 @@ public class RedisUtil {
     public Long publishMsg(String channel, String message) {
         Long result = -1L;
         try {
-            Jedis Jedis = null;
-            Jedis = this.jedisPool.getResource();
-//            if (index != null) {
-//                Jedis.select(index);
-//            }
-            result = Jedis.publish(channel,message);
+            Jedis jedis = null;
+            jedis = this.jedisPool.getResource();
+            result = jedis.publish(channel,message);
             return result;
         } catch (Exception e) {
         }
@@ -79,17 +76,17 @@ public class RedisUtil {
 
     public long expireAt(String key, int unixTimestamp) {
         if (key != null && !key.equals("")) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                long var4 = Jedis.expireAt(key, (long)unixTimestamp);
+                jedis = this.jedisPool.getResource();
+                long var4 = jedis.expireAt(key, (long)unixTimestamp);
                 return var4;
             } catch (Exception var9) {
                 log.error("EXPIRE error[key=" + key + " unixTimestamp=" + unixTimestamp + "]" + var9.getMessage(), var9);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return 0L;
@@ -109,17 +106,17 @@ public class RedisUtil {
      */
     public String trimList(String key, long start, long end) {
         if (key != null && !key.equals("")) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                String var7 = Jedis.ltrim(key, start, end);
+                jedis = this.jedisPool.getResource();
+                String var7 = jedis.ltrim(key, start, end);
                 return var7;
             } catch (Exception var11) {
                 log.error("LTRIM 出错[key=" + key + " start=" + start + " end=" + end + "]" + var11.getMessage(), var11);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return "-";
@@ -139,17 +136,17 @@ public class RedisUtil {
         if (key == null) {
             return 0L;
         } else {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                long var3 = Jedis.scard(key);
+                jedis = this.jedisPool.getResource();
+                long var3 = jedis.scard(key);
                 return var3;
             } catch (Exception var8) {
                 log.error("countSet error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return 0L;
@@ -185,18 +182,18 @@ public class RedisUtil {
      */
     public boolean setAdd(String key, String... value) {
         if (key != null && value != null) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                Jedis.sadd(key, value);
+                jedis = this.jedisPool.getResource();
+                jedis.sadd(key, value);
                 boolean var4 = true;
                 return var4;
             } catch (Exception var8) {
                 log.error("setList error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return false;
@@ -216,18 +213,18 @@ public class RedisUtil {
      */
     public boolean listSetIndexValue(String key,Long index, String value) {
         if (key != null && value != null && index != null) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                Jedis.lset(key,index, value);
+                jedis = this.jedisPool.getResource();
+                jedis.lset(key,index, value);
                 boolean var4 = true;
                 return var4;
             } catch (Exception var8) {
                 log.error("lset error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return false;
@@ -246,17 +243,17 @@ public class RedisUtil {
      */
     public boolean isSetMember(String key, String value) {
         if (key != null && value != null) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                boolean var4 = Jedis.sismember(key, value);
+                jedis = this.jedisPool.getResource();
+                boolean var4 = jedis.sismember(key, value);
                 return var4;
             } catch (Exception var8) {
                 log.error("setList error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return false;
@@ -273,17 +270,17 @@ public class RedisUtil {
      * @Date: 2020/9/17 16:29
      */
     public Set<String> setMembers(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Set var3 = Jedis.smembers(key);
+            jedis = this.jedisPool.getResource();
+            Set var3 = jedis.smembers(key);
             return var3;
         } catch (Exception var7) {
             log.error("getList error.", var7);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return null;
@@ -298,18 +295,18 @@ public class RedisUtil {
      * @Date: 2020/9/17 16:31
      */
     public boolean setRemove(String key, String... value) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.srem(key, value);
+            jedis = this.jedisPool.getResource();
+            jedis.srem(key, value);
             boolean var4 = true;
             return var4;
         } catch (Exception var8) {
             log.error("getList error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
@@ -323,17 +320,17 @@ public class RedisUtil {
      * @Date: 2020/9/17 16:32
      */
     public String setReturnRandomValue(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            String var3 = Jedis.srandmember(key);
+            jedis = this.jedisPool.getResource();
+            String var3 = jedis.srandmember(key);
             return var3;
         } catch (Exception var7) {
             log.error("getList error.", var7);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return "";
@@ -368,18 +365,18 @@ public class RedisUtil {
     }
 
     public boolean removeListValue(String key, long count, String value) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.lrem(key, count, value);
+            jedis = this.jedisPool.getResource();
+            jedis.lrem(key, count, value);
             boolean var6 = true;
             return var6;
         } catch (Exception var10) {
             log.error("getList error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
@@ -387,17 +384,17 @@ public class RedisUtil {
 
     public List<String> rangeList(String key, long start, long end) {
         if (key != null && !key.equals("")) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                List var7 = Jedis.lrange(key, start, end);
+                jedis = this.jedisPool.getResource();
+                List var7 = jedis.lrange(key, start, end);
                 return var7;
             } catch (Exception var11) {
                 log.error("rangeList 出错[key=" + key + " start=" + start + " end=" + end + "]" + var11.getMessage(), var11);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return null;
@@ -417,17 +414,17 @@ public class RedisUtil {
         if (key == null) {
             return 0L;
         } else {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                long var3 = Jedis.llen(key);
+                jedis = this.jedisPool.getResource();
+                long var3 = jedis.llen(key);
                 return var3;
             } catch (Exception var8) {
                 log.error("countList error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return 0L;
@@ -454,18 +451,18 @@ public class RedisUtil {
      */
     public boolean lpush(String key, String... value) {
         if (key != null && value != null) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                Jedis.lpush(key, value);
+                jedis = this.jedisPool.getResource();
+                jedis.lpush(key, value);
                 boolean var4 = true;
                 return var4;
             } catch (Exception var8) {
                 log.error("setList error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return false;
@@ -486,17 +483,17 @@ public class RedisUtil {
         if (key == null) {
             return "";
         } else {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                String var4 = Jedis.lindex(key, (long)index);
+                jedis = this.jedisPool.getResource();
+                String var4 = jedis.lindex(key, (long)index);
                 return var4;
             } catch (Exception var8) {
                 log.error("lindex error.", var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return "";
@@ -523,17 +520,17 @@ public class RedisUtil {
     }
 
     public List<String> lrange(String key, int start, int end) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            List var5 = Jedis.lrange(key, (long)start, (long)end);
+            jedis = this.jedisPool.getResource();
+            List var5 = jedis.lrange(key, (long)start, (long)end);
             return var5;
         } catch (Exception var9) {
             log.error("lrange error.", var9);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return null;
@@ -599,17 +596,17 @@ public class RedisUtil {
 
     public long ttl(String key) {
         if (key != null && !key.equals("")) {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                long var3 = Jedis.ttl(key);
+                jedis = this.jedisPool.getResource();
+                long var3 = jedis.ttl(key);
                 return var3;
             } catch (Exception var8) {
                 log.error("EXPIRE error[key=" + key + "]" + var8.getMessage(), var8);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return 0L;
@@ -622,18 +619,18 @@ public class RedisUtil {
         if (value == null) {
             return false;
         } else {
-            Jedis Jedis = null;
+            Jedis jedis = null;
 
             try {
-                Jedis = this.jedisPool.getResource();
-                Jedis.hset(domain, key, value);
+                jedis = this.jedisPool.getResource();
+                jedis.hset(domain, key, value);
                 boolean var5 = true;
                 return var5;
             } catch (Exception var9) {
                 log.error("setHSet error.", var9);
-                this.returnBrokenResource(Jedis);
+                this.returnBrokenResource(jedis);
             } finally {
-                this.returnResource(Jedis);
+                this.returnResource(jedis);
             }
 
             return false;
@@ -641,68 +638,68 @@ public class RedisUtil {
     }
 
     public String hashGet(String domain, String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            String var4 = Jedis.hget(domain, key);
+            jedis = this.jedisPool.getResource();
+            String var4 = jedis.hget(domain, key);
             return var4;
         } catch (Exception var8) {
             log.error("getHSet error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return null;
     }
 
     public long hashDelete(String domain, String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         long count = 0L;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            count = Jedis.hdel(domain, new String[]{key});
+            jedis = this.jedisPool.getResource();
+            count = jedis.hdel(domain, new String[]{key});
         } catch (Exception var10) {
             log.error("delHSet error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return count;
     }
 
     public long hashDelete(String domain, String... key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         long count = 0L;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            count = Jedis.hdel(domain, key);
+            jedis = this.jedisPool.getResource();
+            count = jedis.hdel(domain, key);
         } catch (Exception var10) {
             log.error("delHSet error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return count;
     }
 
     public boolean hashExists(String domain, String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         boolean isExist = false;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            isExist = Jedis.hexists(domain, key);
+            jedis = this.jedisPool.getResource();
+            isExist = jedis.hexists(domain, key);
         } catch (Exception var9) {
             log.error("existsHSet error.", var9);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return isExist;
@@ -744,34 +741,34 @@ public class RedisUtil {
      * @Date: 2020/9/17 17:31
      */
     public List<String> hashValues(String domain) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         List retList = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            retList = Jedis.hvals(domain);
+            jedis = this.jedisPool.getResource();
+            retList = jedis.hvals(domain);
         } catch (Exception var8) {
             log.error("hvals error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return retList;
     }
 
     public Set<String> hashKeys(String domain) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         Set retList = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            retList = Jedis.hkeys(domain);
+            jedis = this.jedisPool.getResource();
+            retList = jedis.hkeys(domain);
         } catch (Exception var8) {
             log.error("hkeys error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return retList;
@@ -779,17 +776,17 @@ public class RedisUtil {
 
 
     public long hashLength(String domain) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         long retList = 0L;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            retList = Jedis.hlen(domain);
+            jedis = this.jedisPool.getResource();
+            retList = jedis.hlen(domain);
         } catch (Exception var9) {
             log.error("hkeys error.", var9);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return retList;
@@ -805,77 +802,84 @@ public class RedisUtil {
      * @Date: 2020/9/17 17:20
      */
     public boolean zsetAdd(String key, long score, String value) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.zadd(key, (double)score, value);
+            jedis = this.jedisPool.getResource();
+            jedis.zadd(key, (double)score, value);
             boolean var6 = true;
             return var6;
         } catch (Exception var10) {
             log.error("setSortedSet error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
     }
 
+    /**
+     * @Description:  获取排序set集合
+     * @param: key
+     * @param: startScore
+     * @param: endScore
+     * @param: orderByDesc 降序
+     * @return: java.util.Set<java.lang.String>
+     * @Author: chenping
+     * @Date: 2021/3/4 17:18
+     */
     public Set<String> getSoredSet(String key, long startScore, long endScore, boolean orderByDesc) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         Set var8;
         try {
-            Jedis = this.jedisPool.getResource();
+            jedis = this.jedisPool.getResource();
             if (orderByDesc) {
-                var8 = Jedis.zrevrangeByScore(key, (double)endScore, (double)startScore);
+                var8 = jedis.zrevrangeByScore(key, (double)endScore, (double)startScore);
                 return var8;
             }
 
-            var8 = Jedis.zrangeByScore(key, (double)startScore, (double)endScore);
+            var8 = jedis.zrangeByScore(key, (double)startScore, (double)endScore);
         } catch (Exception var12) {
             log.error("getSoredSet error.", var12);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
             return null;
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return var8;
     }
 
     public Set<String> zrangebyscore(String key, String max, String min) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         Set var8;
         try {
-            Jedis = this.jedisPool.getResource();
-//            if (index != null) {
-//                Jedis.select(index);
-//            }
-            var8 = Jedis.zrevrangeByScore(key, max, min);
+            jedis = this.jedisPool.getResource();
+            var8 = jedis.zrevrangeByScore(key, max, min);
         } catch (Exception e) {
             log.error("zrangebyscore error.", e);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
             return null;
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
         return var8;
     }
 
     public Set<Tuple> zrangeWithScores(String key,long start, long end) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         Set<Tuple> retList = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            retList = Jedis.zrangeWithScores(key,start,end);
+            jedis = this.jedisPool.getResource();
+            retList = jedis.zrangeWithScores(key,start,end);
         } catch (Exception var8) {
             log.error("zkeys error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return retList;
@@ -889,13 +893,13 @@ public class RedisUtil {
      * @Date: 2020/9/17 17:56
      */
     public List<Tuples> zsetGetAll(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
         Set<Tuple> setList = null;
         List<Tuples> list = new ArrayList<>();
 
         try {
-            Jedis = this.jedisPool.getResource();
-            setList = Jedis.zrangeWithScores(key,0,-1);
+            jedis = this.jedisPool.getResource();
+            setList = jedis.zrangeWithScores(key,0,-1);
             for (Tuple tuple : setList) {
                 Tuples tuples = new Tuples();
                 tuples.setElement(tuple.getElement());
@@ -905,67 +909,67 @@ public class RedisUtil {
             }
         } catch (Exception var8) {
             log.error("zkeys error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
         return list;
     }
 
     public long countSoredSet(String key, long startScore, long endScore) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Long count = Jedis.zcount(key, (double)startScore, (double)endScore);
+            jedis = this.jedisPool.getResource();
+            Long count = jedis.zcount(key, (double)startScore, (double)endScore);
             long var8 = count == null ? 0L : count;
             return var8;
         } catch (Exception var13) {
             log.error("countSoredSet error.", var13);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return 0L;
     }
 
     public boolean zsetDelete(String key, String value) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            long count = Jedis.zrem(key, new String[]{value});
+            jedis = this.jedisPool.getResource();
+            long count = jedis.zrem(key, new String[]{value});
             boolean var6 = count > 0L;
             return var6;
         } catch (Exception var10) {
             log.error("delSortedSet error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
     }
 
     public Set<String> getSoredSetByRange(String key, int startRange, int endRange, boolean orderByDesc) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
+            jedis = this.jedisPool.getResource();
             Set var6;
             if (orderByDesc) {
-                var6 = Jedis.zrevrange(key, (long)startRange, (long)endRange);
+                var6 = jedis.zrevrange(key, (long)startRange, (long)endRange);
                 return var6;
             }
 
-            var6 = Jedis.zrange(key, (long)startRange, (long)endRange);
+            var6 = jedis.zrange(key, (long)startRange, (long)endRange);
             return var6;
         } catch (Exception var10) {
             log.error("getSoredSetByRange error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return null;
@@ -981,20 +985,17 @@ public class RedisUtil {
      * @Date: 2020/5/24
      */
     public Double getScore(String key, String member) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-//            if (index != null) {
-//                Jedis.select(index);
-//            }
-            Double var4 = Jedis.zscore(key, member);
+            jedis = this.jedisPool.getResource();
+            Double var4 = jedis.zscore(key, member);
             return var4;
         } catch (Exception var8) {
             log.error("getSoredSet error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return null;
@@ -1002,71 +1003,96 @@ public class RedisUtil {
 
 
     public boolean set(String key, String value, int second) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.setex(key, second, value);
+            jedis = this.jedisPool.getResource();
+            jedis.setex(key, second, value);
             boolean var5 = true;
             return var5;
         } catch (Exception var9) {
             log.error("set error.", var9);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
     }
 
     public boolean set(String key, String value) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.set(key, value);
+            jedis = this.jedisPool.getResource();
+            jedis.set(key, value);
             boolean var4 = true;
             return var4;
         } catch (Exception var8) {
             log.error("set error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
     }
 
     public String get(String key, String defaultValue) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            String var4 = StringUtils.isEmpty(Jedis.get(key))? defaultValue:Jedis.get(key);
+            jedis = this.jedisPool.getResource();
+            String var4 = StringUtils.isEmpty(jedis.get(key))? defaultValue:jedis.get(key);
             return var4;
         } catch (Exception var8) {
             log.error("get error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return defaultValue;
     }
 
     public boolean del(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.del(key);
+            jedis = this.jedisPool.getResource();
+            jedis.del(key);
             boolean var3 = true;
             return var3;
         } catch (Exception var7) {
             log.error("del error.", var7);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
+        }
+
+        return false;
+    } 
+    /** 
+     * @Description:  批量删除key
+     * @param: keys 
+     * @return: boolean 
+     * @Author: chenping
+     * @Date: 2021/3/4 16:58
+     */
+    public boolean del(Set<String> keys) {
+        Jedis jedis = null;
+
+        try {
+            jedis = this.jedisPool.getResource();
+            for (String k : keys) {
+                jedis.del(k);
+            }
+            return true;
+        } catch (Exception var7) {
+            log.error("del error.", var7);
+            this.returnBrokenResource(jedis);
+        } finally {
+            this.returnResource(jedis);
         }
 
         return false;
@@ -1080,34 +1106,34 @@ public class RedisUtil {
      * @Date: 2020/9/17 17:13
      */
     public long incr(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            long var3 = Jedis.incr(key);
+            jedis = this.jedisPool.getResource();
+            long var3 = jedis.incr(key);
             return var3;
         } catch (Exception var8) {
             log.error("incr error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return 0L;
     }
 
     public long decr(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            long var3 = Jedis.decr(key);
+            jedis = this.jedisPool.getResource();
+            long var3 = jedis.decr(key);
             return var3;
         } catch (Exception var8) {
             log.error("decr error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return 0L;
@@ -1140,50 +1166,50 @@ public class RedisUtil {
     }
 
     public boolean lock(String key) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         boolean var4;
         try {
-            Jedis = this.jedisPool.getResource();
-            Long result = Jedis.setnx(key, "1");
+            jedis = this.jedisPool.getResource();
+            Long result = jedis.setnx(key, "1");
             var4 = result == 1L;
         } catch (Exception var8) {
             log.error("lock-setnx error:", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
             throw var8;
 //            throw new Exception("获取锁出现异常：");
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return var4;
     }
 
     public boolean set(String key, String value, String nxxx, int second) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Jedis.set(key, value, nxxx, "seconds", second);
+            jedis = this.jedisPool.getResource();
+            jedis.set(key, value, nxxx, "seconds", second);
             boolean var6 = true;
             return var6;
         } catch (Exception var10) {
             log.error("set error.", var10);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return false;
     }
 
     public boolean lock(String key, int expireSecond) {
-        Jedis Jedis = null;
+        Jedis jedis = null;
 
         boolean var5;
         try {
-            Jedis = this.jedisPool.getResource();
-            String result = Jedis.set(key, "1", "NX", "EX", expireSecond);
+            jedis = this.jedisPool.getResource();
+            String result = jedis.set(key, "1", "NX", "EX", expireSecond);
             if (!StringUtils.isEmpty(result)) {
                 if ("OK".compareTo(result) == 0) {
                     var5 = true;
@@ -1198,10 +1224,10 @@ public class RedisUtil {
             return var5;
         } catch (Exception var9) {
             log.error("lock-setnx error:", var9);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
             var5 = false;
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return var5;
@@ -1270,18 +1296,18 @@ public class RedisUtil {
         }
     }
 
-    public Set<String> getKeys(String parrten, Set<String> defaultValue) {
-        Jedis Jedis = null;
+    public Set<String> getKeys(String parrten) {
+        Jedis jedis = null;
 
         try {
-            Jedis = this.jedisPool.getResource();
-            Set var4 = Jedis.keys(parrten);
+            jedis = this.jedisPool.getResource();
+            Set var4 = jedis.keys(parrten);
             return var4;
         } catch (Exception var8) {
             log.error("get error.", var8);
-            this.returnBrokenResource(Jedis);
+            this.returnBrokenResource(jedis);
         } finally {
-            this.returnResource(Jedis);
+            this.returnResource(jedis);
         }
 
         return Collections.EMPTY_SET;
