@@ -49,6 +49,10 @@ public class RabbitMqConfig {
         return new Queue("queueName3");
     }
 
+    @Bean
+    public Queue Queue4() {
+        return new Queue("queueName4");
+    }
 
 //    ====================================================================================================================
 //    Topic Exchange是RabbitMQ中最灵活的一种方式，它能够根据routing_key自由的绑定不同的队列，可以适用绝大部分的项目需求

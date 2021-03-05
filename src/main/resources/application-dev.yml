@@ -33,6 +33,7 @@ spring:
     port: 5672
     username: guest
     password: guest
+#    publisher-returns: true   # 消息发送到交换机是否确认回调 开启后监控页面queues total、ready等才有值
 
 mybatis:
   configuration:
