@@ -2,6 +2,7 @@ package com.example.cp.entity;
 
 import cn.afterturn.easypoi.excel.annotation.Excel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @Description:
@@ -9,6 +10,7 @@ import lombok.Data;
  * @Date: 2021-02-08
  */
 @Data
+@NoArgsConstructor
 public class City {
 
     @Excel(name = "省份",mergeVertical = true)//mergeVertical 纵向合并内容相同的单元格 默认false

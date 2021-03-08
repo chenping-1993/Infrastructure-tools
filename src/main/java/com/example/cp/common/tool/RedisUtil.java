@@ -1286,10 +1286,36 @@ public class RedisUtil {
         return this.set(key, JSON.toJSONString(value), second);
     }
 
+    /**
+     * @Description:  获取对象
+     * @param: key
+     * @param: clazz
+     * @return: T
+     * @Author: chenping
+     * @Date: 2021/3/8 13:55
+     */
     public <T> T getObject(String key, Class<T> clazz) {
         try {
             String value = this.get(key, "");
             return org.springframework.util.StringUtils.isEmpty(value) ? null : JSON.parseObject(value, clazz);
+        } catch (Exception var4) {
+            log.error("get redis but json error : " + var4 + "\r\nkey:" + key);
+            return null;
+        }
+    }
+
+    /**
+     * @Description:  获取string的list结果
+     * @param: key
+     * @param: clazz
+     * @return: java.util.List<T>
+     * @Author: chenping
+     * @Date: 2021/3/8 14:11
+     */
+    public <T> List<T> getList(String key, Class<T> clazz) {
+        try {
+            String value = this.get(key, "");
+            return StringUtils.isEmpty(value) ? null : JSON.parseArray(value, clazz);
         } catch (Exception var4) {
             log.error("get redis but json error : " + var4 + "\r\nkey:" + key);
             return null;
