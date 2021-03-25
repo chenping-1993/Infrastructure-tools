@@ -38,4 +38,21 @@ public enum CodeMessage {
         this.msg = msg;
     }
 
+    /**
+     * @Description:  根据code获取message
+     * @param: code
+     * @return: java.lang.String
+     * @Author: chenping
+     * @Date: 2021/3/25 17:34
+     */
+    public static String getMessageByCode(String code) {
+        CodeMessage[] codeMsgs = CodeMessage.values();
+        for (CodeMessage codeMessage: codeMsgs) {
+            if (code.equals(codeMessage.getCode())) {
+                return codeMessage.getMsg();
+            }
+        }
+        return "";
+    }
+
 }
