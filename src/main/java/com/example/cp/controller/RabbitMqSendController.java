@@ -90,7 +90,10 @@ public class RabbitMqSendController {
     @GetMapping("/rabbitmq/sendToClient")
     public String sendToClient() {
         String message = "server message sendToClient";
-        amqpTemplate.convertAndSend("queueName3",message);
+        for (int i = 0; i < 10000; i++) {
+            amqpTemplate.convertAndSend("queueName3",message+": "+i);
+
+        }
         return message;
     }
 
@@ -107,7 +110,7 @@ public class RabbitMqSendController {
     @GetMapping("/rabbitmq/sendMsgNoRepeat")
     public String sendMsgNoRepeat() {
         String message = "server message sendMsgNoRepeat";
-        for (int i = 0; i <1000 ; i++) {
+        for (int i = 0; i <10000 ; i++) {
             Message msg = MessageBuilder.withBody((message+"--"+i).getBytes()).setMessageId(UUID.randomUUID()+"").build();
             amqpTemplate.convertAndSend("queueName4",msg);
         }

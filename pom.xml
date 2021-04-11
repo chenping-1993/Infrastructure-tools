@@ -192,23 +192,55 @@
             <version>2.6</version>
         </dependency>
         <!-- word预览-->
+        <!-- 为了兼容 1.4版本的ooxml-schemas 降低版本为 4.0.1 -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>4.1.1</version>
+<!--            <version>4.1.1</version>-->
+            <version>4.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-scratchpad</artifactId>
-            <version>4.1.1</version>
+<!--            <version>4.1.1</version>-->
+            <version>4.0.1</version>
         </dependency>
 <!--        rabbitmq  需要安装 erlang语言-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
+
+        <!-- spire 相关包 免费版本 -->
+        <!-- spire 只需加入office的jar包即可 -->
+        <dependency>
+            <groupId>e-iceblue</groupId>
+            <artifactId>spire.office.free</artifactId>
+             <version>3.9.0</version>
+        </dependency>
+
+        <!-- 实现使用poi给excel加水印相关包 -->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>ooxml-schemas</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>2.2.5</version>
+        </dependency>
     </dependencies>
 
+    <!-- spire 相关包仓库 -->
+    <repositories>
+        <repository>
+            <id>com.e-iceblue</id>
+<!--            <url>http://repo.e-iceblue.cn/repository/maven-public/</url>-->
+            <name>e-iceblue</name>
+            <url>http://repo.e-iceblue.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

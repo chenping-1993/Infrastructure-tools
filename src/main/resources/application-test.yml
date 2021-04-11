@@ -33,6 +33,7 @@ spring:
     port: 5672
     username: guest
     password: guest
+#    publisher-confirm-type: correlated
 #    publisher-returns: true   # 消息发送到交换机是否确认回调 消息发送到交换机是否确认回调
 
 mybatis:

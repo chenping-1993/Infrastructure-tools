@@ -30,18 +30,18 @@ public class RabbitMqReceiver4Handler {
      * @Author: chenping
      * @Date: 2021/3/5 17:56
      */
-    @RabbitListener(queues = "queueName4")//发送的队列名称     @RabbitListener注解到类和方法都可以
-    @RabbitHandler
-    public void receiveMessage(Message message) throws UnsupportedEncodingException {
-        String messageId = message.getMessageProperties().getMessageId();
-        String msg = new String(message.getBody(),"utf-8");
-
-        String messageRedisValue = redisUtil.get("messageId","");
-        if (messageRedisValue.equals(messageId)) {
-            return;
-        }
-        System.out.println("消息："+msg+", id:"+messageId);
-
-        redisUtil.set("messageId",messageId);
-    }
+//    @RabbitListener(queues = "queueName4")//发送的队列名称     @RabbitListener注解到类和方法都可以
+//    @RabbitHandler
+//    public void receiveMessage(Message message) throws UnsupportedEncodingException {
+//        String messageId = message.getMessageProperties().getMessageId();
+//        String msg = new String(message.getBody(),"utf-8");
+//
+//        String messageRedisValue = redisUtil.get("messageId","");
+//        if (messageRedisValue.equals(messageId)) {
+//            return;
+//        }
+//        System.out.println("消息："+msg+", id:"+messageId);
+//
+//        redisUtil.set("messageId",messageId);
+//    }
 }
