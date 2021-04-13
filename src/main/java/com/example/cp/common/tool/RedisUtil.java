@@ -1203,6 +1203,14 @@ public class RedisUtil {
         return false;
     }
 
+    /**
+     * @Description:  分布锁
+     * @param: key
+     * @param: expireSecond
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2021/4/12 9:51
+     */
     public boolean lock(String key, int expireSecond) {
         Jedis jedis = null;
 

@@ -3,6 +3,7 @@ import com.spire.doc.Document;
 import com.spire.doc.FileFormat;
 import com.spire.doc.Section;
 import com.spire.doc.TextWatermark;
+import com.spire.doc.collections.SectionCollection;
 import com.spire.doc.documents.WatermarkLayout;
 
 import java.awt.*;
@@ -21,7 +22,10 @@ public class AddDocWaterMark {
 
         Document document = new Document();
         document.loadFromFile("C:\\Users\\chenping\\Desktop\\simple.docx");
-        insertTextWatermark(document.getSections().get(0));
+        SectionCollection sections = document.getSections();
+        for (int i = 0; i < sections.getCount(); i++) {
+            insertTextWatermark(document.getSections().get(i));
+        }
         document.saveToFile("C:\\Users\\chenping\\Desktop\\simple-1.docx", FileFormat.Docx );
     }
 

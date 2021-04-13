@@ -38,8 +38,8 @@ public class GlobalExceptionHandler {
      * @Author: chenping
      * @Date: 2020/12/16 18:16
      */
-    @ExceptionHandler(GameException.class)
-    public BaseResponse testExceptionHandler(GameException e) {
+    @ExceptionHandler(CustomException.class)
+    public BaseResponse testExceptionHandler(CustomException e) {
         return BaseResponse.fail(e.getMessage());
     }
 

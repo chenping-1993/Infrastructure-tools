@@ -2,7 +2,7 @@ package com.example.cp.service;
 
 import com.example.cp.entity.Room;
 import com.example.cp.common.config.YmlPropers;
-import com.example.cp.common.exception.GameException;
+import com.example.cp.common.exception.CustomException;
 import com.example.cp.common.tool.RedisUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class MatchService {
             Set<Tuple> roomList =  redisUtil.zrangeWithScores(matchKey,0,-1);
 
             if (null == roomList) {
-                throw new GameException("没有找到队列");
+                throw new CustomException("没有找到队列");
             }
 
             List<Room> list = new ArrayList<>();
@@ -114,7 +114,7 @@ public class MatchService {
         Integer peopleNum = redisUtil.getScore(redisKey, roomId).intValue();
         if (peopleNum >= 20) {
             log.info("房间已满");
-            throw new GameException("房间已满");
+            throw new CustomException("房间已满");
         }
 
         //发布消息

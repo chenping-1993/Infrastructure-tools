@@ -1,6 +1,6 @@
 package com.example.cp.controller;
 
-import com.example.cp.common.exception.GameException;
+import com.example.cp.common.exception.CustomException;
 import com.example.cp.entity.BaseResponse;
 import com.example.cp.entity.TestValidVO;
 import com.example.cp.entity.User;
@@ -36,7 +36,7 @@ public class TestValidExceptionController {
     @PostMapping(value = "/testServiceMyException")
     public BaseResponse testServiceException(@RequestBody @Validated TestValidVO vo) {
         List<User> u = userMapper.selectAll();
-        throw new GameException("请求失败");
+        throw new CustomException("请求失败");
     }
 
     @ApiOperation(value = "测试Exception异常" ,  notes="测试Exception异常")

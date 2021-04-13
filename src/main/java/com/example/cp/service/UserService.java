@@ -1,6 +1,6 @@
 package com.example.cp.service;
 
-import com.example.cp.common.exception.GameException;
+import com.example.cp.common.exception.CustomException;
 import com.example.cp.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -47,7 +47,7 @@ public class UserService {
             } else if (fileName.endsWith("xlsx")) {
                 wb = new XSSFWorkbook(file.getInputStream());
             } else {
-                throw new GameException("文件格式不正确");
+                throw new CustomException("文件格式不正确");
             }
             sheet = wb.getSheetAt(0);//获取第一个sheet页
             int rowNum = sheet.getPhysicalNumberOfRows();//最大行数

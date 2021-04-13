@@ -5,19 +5,19 @@ package com.example.cp.common.exception;
  * @Author: chenping
  * @Date: 2020-05-23
  */
-public class GameException extends RuntimeException {
+public class CustomException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public GameException(String msg) {
+	public CustomException(String msg) {
 		super(msg);
 	}
 
-	public GameException(String msg, Exception e) {
+	public CustomException(String msg, Exception e) {
 		super(msg, e);
 	}
 
-	public GameException(Exception e) {
+	public CustomException(Exception e) {
 		super(e);
 	}
 }
