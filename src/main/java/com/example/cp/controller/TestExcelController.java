@@ -67,7 +67,7 @@ public class TestExcelController {
     @ApiOperation(value = "预览excel xls格式" )
     @GetMapping("/excelToHtml")
     public void toHtmlOf07Base(HttpServletResponse response) throws IOException {
-        ExcelToHtmlParams params = new ExcelToHtmlParams(WorkbookFactory.create(POICacheManager.getFile("C:/download/用户信息表.xls")),true,"yes");
+        ExcelToHtmlParams params = new ExcelToHtmlParams(WorkbookFactory.create(POICacheManager.getFile("C:/download/bbb.xlsx")),true,"yes");
         response.getOutputStream().write(ExcelXorHtmlUtil.excelToHtml(params).getBytes());
     }
 

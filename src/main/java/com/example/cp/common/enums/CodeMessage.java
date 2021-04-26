@@ -55,4 +55,21 @@ public enum CodeMessage {
         return "";
     }
 
+    /**
+     * @Description:  根据code获取枚举
+     * @param: code
+     * @return: com.example.cp.common.enums.CodeMessage
+     * @Author: chenping
+     * @Date: 2021/4/25 13:48
+     */
+    public static CodeMessage getEnumByCode(String code) {
+        CodeMessage[] codeMsgs = CodeMessage.values();
+        for (CodeMessage codeMessage: codeMsgs) {
+            if (code.equals(codeMessage.getCode())) {
+                return codeMessage;
+            }
+        }
+        return null;
+    }
+
 }
