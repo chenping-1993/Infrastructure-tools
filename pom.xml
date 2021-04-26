@@ -189,7 +189,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.6</version>
+            <version>2.7</version>
         </dependency>
         <!-- word预览-->
         <!-- 为了兼容 1.4版本的ooxml-schemas 降低版本为 4.0.1 -->
