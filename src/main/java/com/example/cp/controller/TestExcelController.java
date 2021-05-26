@@ -13,6 +13,7 @@ import com.example.cp.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,6 +95,19 @@ public class TestExcelController {
         importParams.setTitleRows(0);
         List<User> list = ExcelImportUtil.importExcel(inputStream, User.class, importParams);
         return list;
+    }
+    @ApiOperation(value = "预览excel多sheet" )
+    @GetMapping("/manySheet")
+    public void manySheet(HttpServletResponse response) throws IOException {
+        StringBuilder html = new StringBuilder();
+        Workbook workbook = WorkbookFactory.create(POICacheManager.getFile("C:/download/manysheet.xlsx"));
+        int sheets = workbook.getNumberOfSheets();
+        for (int i = 0; i <sheets ; i++) {
+            ExcelToHtmlParams params = new ExcelToHtmlParams(workbook,true,i,"yes");
+            String s = ExcelXorHtmlUtil.excelToHtml(params);
+            html.append(s).append("\r");
+        }
+        response.getOutputStream().write(html.toString().getBytes());
     }
     private static void formData(List<City> list) {
         City city = new City("菏泽",2345,16,"山东");
