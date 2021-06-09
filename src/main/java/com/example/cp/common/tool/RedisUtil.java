@@ -1099,6 +1099,30 @@ public class RedisUtil {
     }
 
     /**
+     * @Description:  是否存在key
+     * @param: key
+     * @return: boolean
+     * @Author: chenping
+     * @Date: 2021/6/9 17:01
+     */
+    public boolean hasKey(String key) {
+        Jedis jedis = null;
+
+        try {
+            jedis = this.jedisPool.getResource();
+
+            return jedis.exists(key);
+        } catch (Exception var7) {
+            log.error("del error.", var7);
+            this.returnBrokenResource(jedis);
+        } finally {
+            this.returnResource(jedis);
+        }
+
+        return false;
+    }
+
+    /**
      * @Description:  将 key 中储存的数字值增一
      * @param: key
      * @return: long
