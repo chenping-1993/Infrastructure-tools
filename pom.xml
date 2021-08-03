@@ -18,6 +18,45 @@
         <java.version>1.8</java.version>
     </properties>
 
+<!--多环境配置-->
+<!--    <profiles>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash; 开发环境 &ndash;&gt;-->
+<!--            <id>DEV</id>-->
+<!--            <properties>-->
+<!--                <cp-meta-server-url>http://localhost:8887</cp-meta-server-url>-->
+<!--                <env>DEV</env>-->
+<!--            </properties>-->
+<!--            <activation>-->
+<!--                <activeByDefault>true</activeByDefault>-->
+<!--            </activation>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash; 测试环境 &ndash;&gt;-->
+<!--            <id>TEST</id>-->
+<!--            <properties>-->
+<!--                <cp-meta-server-url>http://localhost:8887</cp-meta-server-url>-->
+<!--                <env>FAT</env>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash; 预发环境 &ndash;&gt;-->
+<!--            <id>UAT</id>-->
+<!--            <properties>-->
+<!--                &lt;!&ndash;<tw-eureka-url>http://192.168.6.232:18000/eureka/,http://192.168.6.233:18000/eureka/</tw-eureka-url> &ndash;&gt;-->
+<!--                <cp-meta-server-url>http://localhost:8887</cp-meta-server-url>-->
+<!--                <env>UAT</env>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--        <profile>-->
+<!--            &lt;!&ndash; 生产环境 &ndash;&gt;-->
+<!--            <id>PRO</id>-->
+<!--            <properties>-->
+<!--                <cp-meta-server-url>http://localhost:8887</cp-meta-server-url>-->
+<!--                <env>PRO</env>-->
+<!--            </properties>-->
+<!--        </profile>-->
+<!--    </profiles>-->
     <dependencies>
 
         <dependency>
