@@ -1,4 +1,7 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: 50MB  #允许上传的文件最大值
   profiles:
     active: test
 
